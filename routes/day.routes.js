@@ -24,7 +24,7 @@ router.post("/day/start", isLoggedIn, (req, res, next) => {
       res.status(200).json(result);
     })
     .catch((err) => {
-      console.log(err);
+      res.status(500).json(err);
     });
 });
 
@@ -34,7 +34,9 @@ router.get("/days", isLoggedIn, (req, res, next) => {
     .then((result) => {
       res.status(200).json(result);
     })
-    .catch((err) => {});
+    .catch((err) => {
+      res.status(500).json(err);
+    });
 });
 
 router.patch("/day/:id", isLoggedIn, (req, res, next) => {
@@ -45,7 +47,7 @@ router.patch("/day/:id", isLoggedIn, (req, res, next) => {
       res.status(200).json(result);
     })
     .catch((err) => {
-      console.log(err);
+      res.status(500).json(err);
     });
 });
 

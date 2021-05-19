@@ -30,7 +30,7 @@ router.post("/signin", (req, res) => {
         });
     })
     .catch((err) => {
-      console.log(err);
+      res.status(500).json(err);
     });
 });
 router.post("/signout", (req, res) => {
@@ -83,7 +83,7 @@ router.post("/signup", (req, res) => {
       res.status(200).json(user);
     })
     .catch((err) => {
-      console.log(err);
+      res.status(500).json(err);
     });
 });
 

@@ -12,7 +12,7 @@ router.post("/createmeal", (req, res, next) => {
       res.status(200).json(meal);
     })
     .catch((err) => {
-      console.log(err);
+      res.status(500).json(err);
     });
 });
 
@@ -21,7 +21,9 @@ router.delete("/meals/:id", (req, res, next) => {
     .then((response) => {
       res.json(response);
     })
-    .catch((err) => {});
+    .catch((err) => {
+      res.status(500).json(err);
+    });
 });
 
 router.get("/meals/:id", (req, res, next) => {
@@ -29,7 +31,9 @@ router.get("/meals/:id", (req, res, next) => {
     .then((meal) => {
       res.status(200).json(meal);
     })
-    .catch((err) => {});
+    .catch((err) => {
+      res.status(500).json(err);
+    });
 });
 
 router.get("/meals", (req, res, next) => {
@@ -37,7 +41,9 @@ router.get("/meals", (req, res, next) => {
     .then((meals) => {
       res.json(meals);
     })
-    .catch((err) => {});
+    .catch((err) => {
+      res.status(500).json(err);
+    });
 });
 
 router.patch("/meals/:id", (req, res, next) => {
@@ -49,7 +55,9 @@ router.patch("/meals/:id", (req, res, next) => {
     .then((response) => {
       res.status(200).json(response);
     })
-    .catch((err) => {});
+    .catch((err) => {
+      res.status(500).json(err);
+    });
 });
 
 // You put the next routes here 👇
