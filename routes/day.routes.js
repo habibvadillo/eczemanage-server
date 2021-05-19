@@ -42,7 +42,8 @@ router.get("/days", isLoggedIn, (req, res, next) => {
 router.patch("/day/:id", isLoggedIn, (req, res, next) => {
   let update = JSON.parse(JSON.stringify(req.body));
   console.log(update);
-  DayModel.findByIdAndUpdate(req.params.id, update)
+  DayModel.findByIdAndUpdate(req.params.id, update, { new: true })
+    .populate("meals")
     .then((result) => {
       res.status(200).json(result);
     })
