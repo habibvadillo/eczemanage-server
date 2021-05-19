@@ -9,7 +9,14 @@ const mealSchema = new Schema({
   ingredients: {
     type: [String],
   },
+  author: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
 });
+
+mealSchema.index({ author: 1, name: 1 }, { unique: true });
 
 const Meal = model("Meal", mealSchema);
 
