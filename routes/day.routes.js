@@ -63,8 +63,6 @@ router.get("/days", isLoggedIn, (req, res, next) => {
           });
         dayDec++;
       }
-      console.log(result.sort((a, b) => a.date.localeCompare(b.date)));
-
       res.status(200).json(result.sort((a, b) => a.date.localeCompare(b.date)));
     })
     .catch((err) => {
