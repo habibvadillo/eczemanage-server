@@ -2,9 +2,10 @@ const router = require("express").Router();
 const MealModel = require("../models/Meal.model");
 
 router.post("/createmeal", (req, res, next) => {
-  const { name, ingredients, author } = req.body;
+  const { name, ingredients, description, author } = req.body;
   MealModel.create({
     name,
+    description,
     ingredients,
     author,
   })
@@ -49,9 +50,25 @@ router.get("/meals", (req, res, next) => {
 router.patch("/meals/:id", (req, res, next) => {
   MealModel.findByIdAndUpdate(
     req.params.id,
-    { $set: { name: req.body.name, ingredients: req.body.ingredients } },
+    {
+      $set: {
+        name: req.body.name,
+        description: req.body.description,
+        ingredients: req.body.ingredients,
+      },
+    },
     { new: true }
   )
+    .then((response) => {
+      res.status(200).json(response);
+    })
+    .catch((err) => {
+      res.status(500).json(err);
+    });
+});
+
+router.delete("/meals/:id", (req, res, next) => {
+  MealModel.findByIdAnddelete(req.params.id)
     .then((response) => {
       res.status(200).json(response);
     })

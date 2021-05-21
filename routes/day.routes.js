@@ -33,10 +33,14 @@ router.get("/days", isLoggedIn, (req, res, next) => {
   DayModel.find({ author: req.session.loggedInUser._id })
     .populate("meals")
     .then((result) => {
+      let days = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
       let dayDec = result.length;
       let today = new Date();
       while (result.length < 7) {
-        let day = `${new Date(
+        let day =
+          days[new Date(new Date().setDate(today.getDate() - dayDec)).getDay()];
+        console.log(day);
+        let date = `${new Date(
           new Date().setDate(today.getDate() - dayDec)
         ).getDate()}`;
         let month = `${
@@ -47,12 +51,14 @@ router.get("/days", isLoggedIn, (req, res, next) => {
         ).getFullYear()}`;
         result.unshift({
           meals: [],
-          date: `${day}/${month}/${year}`,
+          day,
+          date: `${date}/${month}/${year}`,
           author: req.session.loggedInUser._id,
         });
         DayModel.create({
           meals: [],
-          date: `${day}/${month}/${year}`,
+          day,
+          date: `${date}/${month}/${year}`,
           author: req.session.loggedInUser._id,
         })
           .then((result) => {
